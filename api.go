@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,5 +23,5 @@ func (s *Server) Run() {
 	router.GET("/test", func(ctx *gin.Context) {
 		ctx.IndentedJSON(http.StatusOK, "test")
 	})
-	router.Run()
+	router.Run(os.Getenv("PORT"))
 }
