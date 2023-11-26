@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,8 +19,8 @@ func createServer(listenAddr string) *Server {
 func (s *Server) Run() {
 	router := gin.Default()
 
-	router.GET("/test", func(ctx *gin.Context) {
-		ctx.IndentedJSON(http.StatusOK, "test")
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.IndentedJSON(http.StatusOK, "mainpage")
 	})
-	router.Run(os.Getenv("PORT"))
+	router.Run(":" + s.listenAddr)
 }

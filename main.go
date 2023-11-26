@@ -1,17 +1,16 @@
 package main
 
 import (
-	"log"
+	"os"
 
-	"github.com/joho/godotenv"
+	"github.com/canberkbekir/UserAPI_Go/initializers"
 )
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 
-	router := createServer("8080")
+	initializers.LoadEnvVariables()
+	initializers.ConnectToDatabase()
+
+	router := createServer(os.Getenv("PORT"))
 	router.Run()
 }
